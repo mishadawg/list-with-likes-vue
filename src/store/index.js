@@ -8,7 +8,7 @@ export const useCommonStore = defineStore("common", {
   },
   actions: {
     toggle() {
-      this.test = !this.open;
+      this.test = !this.test;
     },
   },
   getters: {
