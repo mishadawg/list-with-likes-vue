@@ -29,6 +29,18 @@ export const useCommonStore = defineStore("common", {
     setPage(payload) {
       this.currentPageInfo = payload;
     },
+    setReactionOnPost(id, reactionName) {
+      let currentPost = this.data.find((item) => item.id === id);
+      if (reactionName === "like") {
+        currentPost.stateReactions = true;
+      }
+      if (reactionName === "dislike") {
+        currentPost.stateReactions = false;
+      }
+      if (reactionName === "reset") {
+        currentPost.stateReactions = null;
+      }
+    },
   },
   getters: {
     getFullData: (state) => state.data,

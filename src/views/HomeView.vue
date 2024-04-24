@@ -3,11 +3,11 @@
     <!-- filtering without like/dislike state -->
     <ListPosts :posts="listPostsData" />
     <Paggination v-if="listPostsData?.length" :items="listPostsData" />
-    <div>
+    <div class="flex">
       <!-- filtering with like state -->
-      <LikedPosts />
+      <LikedPosts :posts="likedPostsData" />
       <!-- filtering with dislike state -->
-      <UnlikedPosts />
+      <UnlikedPosts :posts="dislikedPostsData" />
     </div>
   </div>
 </template>
@@ -28,4 +28,18 @@ onMounted(() => {
 const listPostsData = computed(() => {
   return store?.getFullData?.filter((item) => item.stateReactions === null);
 });
+
+const likedPostsData = computed(() => {
+  return store?.getFullData?.filter((item) => item.stateReactions === true);
+});
+
+const dislikedPostsData = computed(() => {
+  return store?.getFullData?.filter((item) => item.stateReactions === false);
+});
 </script>
+<style lang="scss" scoped>
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+</style>

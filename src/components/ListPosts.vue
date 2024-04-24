@@ -14,7 +14,6 @@ import Post from "@/components/Post";
 
 const props = defineProps({
   posts: {
-    type: Object,
     required: true,
   },
 });
