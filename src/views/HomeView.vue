@@ -1,12 +1,9 @@
 <template>
   <div class="container">
-    <!-- filtering without like/dislike state -->
     <ListPosts :posts="listPostsData" />
     <Paggination v-if="listPostsData?.length" :items="listPostsData" />
     <div class="flex">
-      <!-- filtering with like state -->
       <LikedPosts :posts="likedPostsData" />
-      <!-- filtering with dislike state -->
       <UnlikedPosts :posts="dislikedPostsData" />
     </div>
   </div>
