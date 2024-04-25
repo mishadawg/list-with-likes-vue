@@ -1,17 +1,12 @@
 <template>
   <div class="unliked-post">
     <h2>unliked-post</h2>
-    <ul v-if="props?.posts?.length > 0">
-      <li v-for="(item, index) in props?.posts" :key="index">
-        <Post :post="item" />
-      </li>
-    </ul>
-    <template v-else> Нет не понравившихся постов. </template>
+    <PostsContainer :listPosts="props?.posts" />
   </div>
 </template>
 <script setup>
 import { defineProps } from "vue";
-import Post from "@/components/Post";
+import PostsContainer from "@/components/PostsContainer";
 
 const props = defineProps({
   posts: {

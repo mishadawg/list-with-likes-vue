@@ -1,10 +1,11 @@
 <template>
   <div class="list-post">
-    <ul>
+    <ul v-if="props?.posts?.length > 0">
       <li v-for="(item, index) in itemsToIteration" :key="index">
         <Post :post="slicedUserComp[index]" />
       </li>
     </ul>
+    <template v-else> Нет постов. </template>
   </div>
 </template>
 <script setup>
