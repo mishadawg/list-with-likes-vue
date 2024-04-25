@@ -1,12 +1,25 @@
 <template>
-  <div>
+  <div class="post-item">
     <div>{{ props?.post?.id }}</div>
     <div>{{ props?.post?.title }}</div>
     <div>{{ props?.post?.body }}</div>
-    <div>
-      <button v-if="visibleReactionBtn()" @click="likePost">Like</button>
-      <button v-if="visibleReactionBtn()" @click="dislikePost">Dislike</button>
-      <button v-if="visibleReactionBtn()" @click="resetReactionPost">
+    <div class="post-item-reactions">
+      <button
+        v-if="visibleReactionBtn(props?.post?.stateReactions, 'like')"
+        @click="likePost"
+      >
+        Like
+      </button>
+      <button
+        v-if="visibleReactionBtn(props?.post?.stateReactions, 'dislike')"
+        @click="dislikePost"
+      >
+        Dislike
+      </button>
+      <button
+        v-if="visibleReactionBtn(props?.post?.stateReactions, 'reset')"
+        @click="resetReactionPost"
+      >
         Reset reaction
       </button>
     </div>
@@ -25,17 +38,33 @@ const props = defineProps({
 
 const store = useCommonStore();
 
-const visibleReactionBtn = () => {
+const visibleReactionBtn = (state, reactionName) => {
   let result = true;
-  // console.log(state);
-  // console.log(reactionName);
-  // if (reactionName === "like") {
-  //   if (state === "like") result = true;
-  // } else if (reactionName === "dislike") {
-  //   if (state === "dislike") result = true;
-  // } else if (reactionName === "reset") {
-  //   if (state === "like" || state === "dislike") result = true;
-  // }
+  if (reactionName === "like") {
+    if (state) {
+      return false;
+    } else if (state === false) {
+      return true;
+    } else if (state === null) {
+      return true;
+    }
+  }
+  if (reactionName === "dislike") {
+    if (state) {
+      return true;
+    } else if (state === false) {
+      return false;
+    } else if (state === null) {
+      return true;
+    }
+  }
+  if (reactionName === "reset") {
+    if (state || state === false) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   return result;
 };
 
@@ -49,3 +78,15 @@ const resetReactionPost = () => {
   store.setReactionOnPost(props?.post?.id, "reset");
 };
 </script>
+<style lang="scss" scoped>
+.post-item {
+  margin-bottom: 16px;
+  padding: 16px 0px;
+  border-bottom: 1px solid black;
+  &-reactions {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+  }
+}
+</style>

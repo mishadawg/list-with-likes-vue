@@ -38,5 +38,9 @@ const dislikedPostsData = computed(() => {
 .flex {
   display: flex;
   justify-content: space-between;
+  .liked-post,
+  .unliked-post {
+    width: 49%;
+  }
 }
 </style>
