@@ -1,24 +1,29 @@
 <template>
-  <div class="post-item">
-    <div>{{ props?.post?.id }}</div>
-    <div>{{ props?.post?.title }}</div>
+  <div class="mb-1 py-2 border-black border-b-2">
+    <div>Id: {{ props?.post?.id }}</div>
+    <div class="fs-16 py-2 text-lg text-sky-600">
+      {{ props?.post?.title }}
+    </div>
     <div>{{ props?.post?.body }}</div>
-    <div class="post-item-reactions">
+    <div class="flex gap-4 mt-2">
       <button
         v-if="visibleReactionBtn(props?.post?.stateReactions, 'like')"
         @click="likePost"
+        :class="[styleBtnLike, stockStylesBtn, stockTransitions]"
       >
-        Like
+        Like!
       </button>
       <button
         v-if="visibleReactionBtn(props?.post?.stateReactions, 'dislike')"
         @click="dislikePost"
+        :class="[styleBtnDislike, stockStylesBtn, stockTransitions]"
       >
         Dislike
       </button>
       <button
         v-if="visibleReactionBtn(props?.post?.stateReactions, 'reset')"
         @click="resetReactionPost"
+        :class="[styleBtnReset, stockStylesBtn, stockTransitions]"
       >
         Reset reaction
       </button>
@@ -28,6 +33,13 @@
 <script setup>
 import { defineProps } from "vue";
 import { useCommonStore } from "@/store/index.js";
+import {
+  stockStylesBtn,
+  stockTransitions,
+  styleBtnLike,
+  styleBtnDislike,
+  styleBtnReset,
+} from "@/helpers/style.js";
 
 const props = defineProps({
   post: {
@@ -78,15 +90,3 @@ const resetReactionPost = () => {
   store.setReactionOnPost(props?.post?.id, "reset");
 };
 </script>
-<style lang="scss" scoped>
-.post-item {
-  margin-bottom: 16px;
-  padding: 16px 0px;
-  border-bottom: 1px solid black;
-  &-reactions {
-    display: flex;
-    gap: 8px;
-    margin-top: 16px;
-  }
-}
-</style>

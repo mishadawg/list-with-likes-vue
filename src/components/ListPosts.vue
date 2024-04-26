@@ -1,5 +1,5 @@
 <template>
-  <div class="list-post">
+  <div :class="styleListPosts">
     <ul v-if="props?.posts?.length > 0">
       <li v-for="(item, index) in itemsToIteration" :key="index">
         <Post :post="slicedUserComp[index]" />
@@ -12,6 +12,7 @@
 import { useCommonStore } from "@/store/index.js";
 import { computed, defineProps } from "vue";
 import Post from "@/components/Post";
+import { styleListPosts } from "@/helpers/style.js";
 
 const props = defineProps({
   posts: {
@@ -49,10 +50,3 @@ const itemsToIteration = computed(() => {
   }
 });
 </script>
-<style lang="scss" scoped>
-.list-post {
-  ul {
-    list-style: none;
-  }
-}
-</style>

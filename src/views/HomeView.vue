@@ -1,10 +1,10 @@
 <template>
-  <div class="container">
+  <div class="container mx-auto">
     <ListPosts :posts="listPostsData" />
     <Paggination v-if="listPostsData?.length" :items="listPostsData" />
-    <div class="flex">
-      <LikedPosts :posts="likedPostsData" />
-      <UnlikedPosts :posts="dislikedPostsData" />
+    <div class="flex justify-between items-start gap-4">
+      <LikedPosts class="flex-initial w-full" :posts="likedPostsData" />
+      <UnlikedPosts class="flex-initial w-full" :posts="dislikedPostsData" />
     </div>
   </div>
 </template>
@@ -34,13 +34,3 @@ const dislikedPostsData = computed(() => {
   return store?.getFullData?.filter((item) => item.stateReactions === false);
 });
 </script>
-<style lang="scss" scoped>
-.flex {
-  display: flex;
-  justify-content: space-between;
-  .liked-post,
-  .unliked-post {
-    width: 49%;
-  }
-}
-</style>

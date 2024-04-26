@@ -6,7 +6,6 @@ import router from "./router";
 import "./assets/tailwind.css";
 
 require("./assets/reset.css");
-require("./assets/main.css");
 
 const app = createApp(App);
 

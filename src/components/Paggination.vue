@@ -1,18 +1,27 @@
 <template>
   <div>
-    <ul class="paggination">
+    <ul :class="stylesPagginationContainer">
       <li>
-        <button @click="setPage(currentPage - 1)" :disabled="currentPage === 1">
+        <button
+          :class="[stockStylesBtn, stockTransitions, stylesPaggintaionBtns]"
+          @click="setPage(currentPage - 1)"
+          :disabled="currentPage === 1"
+        >
           Prev
         </button>
       </li>
       <li v-for="(page, index) in totalPage" :key="index">
-        <button :disabled="currentPage === page" @click="setPage(page)">
+        <button
+          :class="[stockStylesBtn, stockTransitions, stylesPaggintaionBtns]"
+          :disabled="currentPage === page"
+          @click="setPage(page)"
+        >
           {{ page }}
         </button>
       </li>
       <li>
         <button
+          :class="[stockStylesBtn, stockTransitions, stylesPaggintaionBtns]"
           @click="setPage(currentPage + 1)"
           :disabled="currentPage === totalPage"
         >
@@ -25,6 +34,7 @@
 <script setup>
 import { useCommonStore } from "@/store/index.js";
 import { computed, ref, defineProps } from "vue";
+import { stockStylesBtn, stockTransitions } from "@/helpers/style.js";
 
 const store = useCommonStore();
 const currentPage = ref(1);
@@ -62,12 +72,8 @@ const setPage = (index) => {
     pageStart: pageStart.value,
   });
 };
+
+// styles vars
+const stylesPagginationContainer = "flex justify-center gap-1";
+const stylesPaggintaionBtns = "hover:bg-teal-200 hover:border-teal-400";
 </script>
-<style lang="scss" scoped>
-.paggination {
-  display: flex;
-  justify-content: center;
-  gap: 4px;
-  list-style: none;
-}
-</style>

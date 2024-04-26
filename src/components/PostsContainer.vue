@@ -4,7 +4,7 @@
       <Post :post="item" />
     </li>
   </ul>
-  <template v-else> Нет не понравившихся постов. </template>
+  <template v-else> Нет постов. </template>
 </template>
 <script setup>
 import { defineProps } from "vue";
